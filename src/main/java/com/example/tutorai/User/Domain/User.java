@@ -17,12 +17,11 @@ public class User implements UserDetails {
     @Column(name="name",nullable=false)
     private String name;
     @Column(name="lastname", nullable=false)
-    private String lastname;
+    private String lastNames;
     @Column(name="age", nullable = false)
     private Integer age;
     @Column(name="role",nullable=false)
     private Role role;
-
 
 
 

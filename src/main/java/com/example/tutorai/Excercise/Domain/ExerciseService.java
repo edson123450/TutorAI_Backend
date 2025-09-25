@@ -1,4 +1,4 @@
 package com.example.tutorai.Excercise.Domain;
 
-public class Excercise {
+public class ExerciseService {
 }
