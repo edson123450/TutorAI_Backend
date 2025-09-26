@@ -3,13 +3,16 @@ package com.example.tutorai.User.Domain;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.userdetails.UserDetails;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name="Users")
 @Inheritance(strategy= InheritanceType.JOINED)
-public class User implements UserDetails {
+public class User{
 
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE)
@@ -20,9 +23,9 @@ public class User implements UserDetails {
     private String lastNames;
     @Column(name="age", nullable = false)
     private Integer age;
+    @Enumerated(EnumType.STRING)
     @Column(name="role",nullable=false)
     private Role role;
-
 
 
 

@@ -17,7 +17,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name="Students")
+@Table(name="Students", uniqueConstraints = @UniqueConstraint(columnNames={"name","lastNames"}))
 public class Student extends User {
 
     @Column(name="password_number",nullable=false)

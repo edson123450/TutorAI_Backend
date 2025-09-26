@@ -13,7 +13,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name="Teachers")
+@Table(name="Teachers", uniqueConstraints = @UniqueConstraint(columnNames="email"))
 public class Teacher extends User {
 
     @Column(name="email",nullable=false)
