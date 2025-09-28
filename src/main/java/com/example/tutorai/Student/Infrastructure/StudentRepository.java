@@ -9,6 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface StudentRepository extends JpaRepository<Student,Long> {
-    Optional<Student> findByNameAndLastNames(String name,String lastNames);
+    Optional<Student> findByNameIgnoreCaseAndLastNamesIgnoreCase(String name,String lastNames);
 }
 

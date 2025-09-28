@@ -17,11 +17,11 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name="Students", uniqueConstraints = @UniqueConstraint(columnNames={"name","lastNames"}))
+@Table(name="Students")
 public class Student extends User {
 
     @Column(name="password_number",nullable=false)
-    private String password_number;
+    private String passwordNumber;
 
     @ManyToMany(mappedBy = "students")
     private Set<Classroom> classrooms=new HashSet<>();

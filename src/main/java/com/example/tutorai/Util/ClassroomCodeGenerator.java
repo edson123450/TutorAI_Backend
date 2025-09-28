@@ -13,7 +13,7 @@ public final class ClassroomCodeGenerator {
         int len=8;
         StringBuilder sb= new StringBuilder(len);
         for (int i=0;i<len;i++){
-            sb.append(ALPHABET.charAt(RND.nextInt(ALPHABET.length())))
+            sb.append(ALPHABET.charAt(RND.nextInt(ALPHABET.length())));
         }
         return sb.toString();
     }
