@@ -22,9 +22,9 @@ public class Level {
     @MapsId("topicId")
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
     @JoinColumns({
-            @JoinColumn(name="classroom_id", referencedColumnName="classroomId"),
-            @JoinColumn(name="course_id",referencedColumnName = "courseId"),
-            @JoinColumn(name="topic_number", referencedColumnName = "topicNumber")
+            @JoinColumn(name="classroom_id", referencedColumnName="classroom_id"),
+            @JoinColumn(name="course_id",referencedColumnName = "course_id"),
+            @JoinColumn(name="topic_number", referencedColumnName = "topic_number")
     })
     private Topic topic;
 

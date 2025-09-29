@@ -1,6 +1,7 @@
 package com.example.tutorai.Level.Domain;
 
 import com.example.tutorai.Topic.Domain.TopicId;
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;
 import lombok.Getter;
@@ -15,6 +16,7 @@ import java.util.Objects;
 public class LevelId implements Serializable {
     @Embedded
     private TopicId topicId;
+    @Column(name = "level_number")
     private Integer levelNumber;
     @Override public boolean equals(Object o){
         if(this==o) return true;
