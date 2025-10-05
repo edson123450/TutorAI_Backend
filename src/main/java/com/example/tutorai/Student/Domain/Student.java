@@ -87,5 +87,13 @@ public class Student extends User {
         return false;
     }
 
+    public void addClassroom(Classroom classroom){
+        classrooms.add(classroom);
+    }
+
+    public void deleteClassroom(Classroom classroom){
+        classrooms.remove(classroom);
+    }
+
 
 }

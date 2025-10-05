@@ -14,13 +14,13 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name="Courses")
+@Table(name="Courses", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 public class Course {
 
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE)
     private Long id;
-    @Column(name="name",nullable=false)
+    @Column(name="name",nullable=false, unique = true)
     private String name;
 
     @ManyToMany(mappedBy="courses")

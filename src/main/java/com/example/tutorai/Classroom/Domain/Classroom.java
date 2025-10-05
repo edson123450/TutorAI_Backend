@@ -18,13 +18,13 @@ import java.util.Set;
 @Entity
 @Table(name="Classrooms")
 public class Classroom {
-
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="classroom_code", nullable = false, unique = true, length=32)
-    private String classroom_code;
+    //@Id
+    //@Column(name="id", nullable = false, unique = true, length=32)
+    //private String classroom_code;
 
     @Column(name="name",nullable=false)
     private String name;
@@ -35,6 +35,9 @@ public class Classroom {
 
     @Column(name="capacity",nullable=false)
     private Integer capacity;
+
+    //@Column(name = "actual_number_students",nullable = false)
+    //private Integer actualNumberStudents;
 
     @ManyToMany
     @JoinTable(name="Classrooms_Students",
@@ -54,13 +57,20 @@ public class Classroom {
     private Set<Topic> topics=new HashSet<>();
 
 
-    @PrePersist
+    /*@PrePersist
     private void ensureCode(){
-        if(this.classroom_code==null || this.classroom_code.isBlank()){
-            this.classroom_code= ClassroomCodeGenerator.generate();
+        if(this.id==null || this.id.isBlank()){
+            this.id= ClassroomCodeGenerator.generate();
+        }
+    }*/
+
+
+    public void setTeacher(Teacher teacher){
+        this.teacher=teacher;
+        if(teacher!=null && !teacher.getClassrooms().contains(this)){
+            teacher.getClassrooms().add(this);
         }
     }
-
 
     public boolean addStudent(Student student){
         if(students.add(student)){
@@ -95,6 +105,10 @@ public class Classroom {
         return false;
     }
 
+    @Transient
+    public Integer getActualNumberStudents(){
+        return students!=null ? students.size() : 0;
+    }
 
 
 }

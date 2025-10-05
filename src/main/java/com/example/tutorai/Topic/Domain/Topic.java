@@ -35,9 +35,9 @@ public class Topic {
     @Column(name="name",nullable = false)
     private String name;
     @Column(name="start_date",nullable = false)
-    private LocalDate start_Date;
+    private LocalDate startDate;
     @Column(name="end_date",nullable = false)
-    private LocalDate end_Date;
+    private LocalDate endDate;
 
     @OneToMany(mappedBy = "topic",
             cascade = CascadeType.ALL,
@@ -57,5 +57,15 @@ public class Topic {
             return true;
         }
         return false;
+    }
+
+    public void setClassroom(Classroom classroom){
+        this.classroom=classroom;
+        classroom.getTopics().add(this);
+    }
+
+    public void setCourse(Course course){
+        this.course=course;
+        course.getTopics().add(this);
     }
 }
