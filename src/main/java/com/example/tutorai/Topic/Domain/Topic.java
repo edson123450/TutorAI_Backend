@@ -3,10 +3,12 @@ package com.example.tutorai.Topic.Domain;
 import com.example.tutorai.Classroom.Domain.Classroom;
 import com.example.tutorai.Course.Domain.Course;
 import com.example.tutorai.Level.Domain.Level;
+import com.example.tutorai.Message.Domain.Message;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import net.minidev.json.annotate.JsonIgnore;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -44,6 +46,16 @@ public class Topic {
             orphanRemoval = true, fetch=FetchType.LAZY)
     private Set<Level> levels=new HashSet<>();
 
+    @OneToMany(
+            mappedBy = "topic",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY
+    )
+    @OrderBy("id.messageNumber ASC")
+    @JsonIgnore
+    private Set<Message> messages=new HashSet<>();
+
     public boolean addLevel(Level level){
         if(levels.add(level)){
             level.setTopic(this);
@@ -67,5 +79,21 @@ public class Topic {
     public void setCourse(Course course){
         this.course=course;
         course.getTopics().add(this);
+    }
+
+    public boolean addMessage(Message m){
+        if(messages.add(m)){
+            m.setTopic(this);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean removeMessage(Message m){
+        if(messages.remove(m)){
+            m.setTopic(null);
+            return true;
+        }
+        return false;
     }
 }
