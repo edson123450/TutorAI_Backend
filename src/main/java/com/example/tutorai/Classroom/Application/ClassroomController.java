@@ -3,6 +3,8 @@ package com.example.tutorai.Classroom.Application;
 import com.example.tutorai.Classroom.DTOs.ClassroomDTO;
 import com.example.tutorai.Classroom.Domain.ClassroomService;
 import com.example.tutorai.Course.DTOs.CourseDTO;
+import com.example.tutorai.Level.DTOs.LevelDTO;
+import com.example.tutorai.Level.Domain.LevelService;
 import com.example.tutorai.Topic.DTOs.TopicDTO;
 import com.example.tutorai.Topic.DTOs.TopicIdDTO;
 import com.example.tutorai.User.Domain.User;
@@ -24,6 +26,7 @@ public class ClassroomController {
 
 
     private final ClassroomService classroomService;
+    private final LevelService levelService;
 
     @GetMapping
     @PreAuthorize("hasAnyRole('STUDENT','TEACHER')")
@@ -63,6 +66,21 @@ public class ClassroomController {
                 me.getRole(), classroomId, courseId, topicNumber);
         return ResponseEntity.ok(dto);
     }
+
+    @GetMapping("/{classroomId}/courses/{courseId}/topics/{topicNumber}/levels")
+    @PreAuthorize("hasAnyRole('STUDENT','TEACHER')")
+    public ResponseEntity<List<LevelDTO>> getAllByTopic(@PathVariable Long classroomId,
+                                                    @PathVariable Long courseId,
+                                                    @PathVariable Integer topicNumber){
+        var result=levelService.getAllByTopic(classroomId,courseId,topicNumber);
+        return ResponseEntity.ok(result);
+    }
+
+
+
+
+
+
 }
 
 

@@ -1,7 +1,7 @@
 package com.example.tutorai.ExerciseResult.Domain;
 
 
-import com.example.tutorai.Excercise.Domain.Exercise;
+import com.example.tutorai.Exercise.Domain.Exercise;
 import com.example.tutorai.Student.Domain.Student;
 import jakarta.persistence.*;
 import lombok.Getter;

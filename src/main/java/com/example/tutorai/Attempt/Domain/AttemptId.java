@@ -1,6 +1,6 @@
 package com.example.tutorai.Attempt.Domain;
 
-import com.example.tutorai.Excercise.Domain.ExerciseId;
+import com.example.tutorai.Exercise.Domain.ExerciseId;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;
 import lombok.Getter;

@@ -1,13 +1,19 @@
 package com.example.tutorai.Student.Application;
 
 
+import com.example.tutorai.Attempt.DTOs.AttemptAnswerRequest;
+import com.example.tutorai.Attempt.Domain.AttemptService;
 import com.example.tutorai.Classroom.DTOs.ClassroomDTO;
 import com.example.tutorai.Classroom.DTOs.JoinClassroomRequest;
+import com.example.tutorai.Exercise.DTOs.ExerciseForStudentDTO;
+import com.example.tutorai.Exercise.Domain.ExerciseService;
 import com.example.tutorai.Student.Domain.StudentService;
 import com.example.tutorai.User.Domain.Role;
 import com.example.tutorai.User.Domain.User;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -22,6 +28,8 @@ import java.util.List;
 public class StudentController {
 
     private final StudentService studentService;
+    private final ExerciseService exerciseService;
+    private final AttemptService attemptService;
 
     @PostMapping("/join/classroom")
     @PreAuthorize("hasRole('STUDENT')")
@@ -46,6 +54,33 @@ public class StudentController {
         List<ClassroomDTO> classrooms=studentService.getStudentClassrooms(me.getId());
         return ResponseEntity.ok(classrooms);
     }*/
+    @GetMapping("/classroom/{classroomId}/course/{courseId}/topic/{topicNumber}/level/{levelNumber}/exercises")
+    @PreAuthorize("hasRole('STUDENT')")
+    public ResponseEntity<List<ExerciseForStudentDTO>> getExercisesByLevel(@PathVariable Long classroomId,
+                                                                           @PathVariable Long courseId,
+                                                                           @PathVariable Integer topicNumber,
+                                                                           @PathVariable Integer levelNumber){
+        var result=exerciseService.getAllByLevelForStudent(classroomId, courseId,topicNumber,levelNumber);
+        return ResponseEntity.ok(result);
+    }
+
+    @PostMapping("/classroom/{classroomId}/course/{courseId}/topic/{topicNumber}/level/{levelNumber}/exercises/{exerciseNumber}/answer")
+    @PreAuthorize("hasRole('STUDENT')")
+    public ResponseEntity<Void> submitAnswer(@PathVariable Long classroomId,
+                                             @PathVariable Long courseId,
+                                             @PathVariable Integer topicNumber,
+                                             @PathVariable Integer levelNumber,
+                                             @PathVariable Integer exerciseNumber,
+                                             @AuthenticationPrincipal User me,
+                                             @RequestBody AttemptAnswerRequest request){
+        attemptService.submitAnswer(me.getId(), classroomId, courseId,
+                topicNumber, levelNumber,exerciseNumber,request.getMarkedOption());
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+
+
+
 
 
 

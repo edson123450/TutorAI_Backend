@@ -1,4 +1,4 @@
-package com.example.tutorai.Excercise.Domain;
+package com.example.tutorai.Exercise.Domain;
 
 import com.example.tutorai.Level.Domain.LevelId;
 import jakarta.persistence.Column;

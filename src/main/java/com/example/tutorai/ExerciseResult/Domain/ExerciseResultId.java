@@ -1,12 +1,11 @@
 package com.example.tutorai.ExerciseResult.Domain;
 
-import com.example.tutorai.Excercise.Domain.ExerciseId;
+import com.example.tutorai.Exercise.Domain.ExerciseId;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.awt.*;
 import java.io.Serializable;
 import java.util.Objects;
 

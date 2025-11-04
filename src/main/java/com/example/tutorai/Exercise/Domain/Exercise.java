@@ -1,8 +1,7 @@
-package com.example.tutorai.Excercise.Domain;
+package com.example.tutorai.Exercise.Domain;
 
 
 import com.example.tutorai.Attempt.Domain.Attempt;
-import com.example.tutorai.Attempt.Domain.AttemptId;
 import com.example.tutorai.ExerciseResult.Domain.ExerciseResult;
 import com.example.tutorai.Level.Domain.Level;
 import jakarta.persistence.*;
@@ -54,9 +53,11 @@ public class Exercise {
     private String optionD;
     @Column(name = "correct_option",nullable = false,length = 1)
     private String correctOption;
+    @Column(name = "detailed_solution",nullable = false)
+    private String detailedSolution;
 
-    @Column(name = "label",length = 30)
-    private String label;
+    /*@Column(name = "label",length = 30)
+    private String label;*/
 
 
     public void setLevel(Level level){

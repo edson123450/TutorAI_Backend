@@ -1,7 +1,7 @@
 package com.example.tutorai.Attempt.Domain;
 
 
-import com.example.tutorai.Excercise.Domain.Exercise;
+import com.example.tutorai.Exercise.Domain.Exercise;
 import com.example.tutorai.Student.Domain.Student;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -39,22 +39,22 @@ public class Attempt {
 
     public void setExercise(Exercise exercise){
         this.exercise=exercise;
-        if(exercise!=null){
+        /*if(exercise!=null){
             if(this.id==null){
                 this.id= new AttemptId();
             }
             this.id.setExerciseId(exercise.getId());
-        }
+        }*/
     }
 
     public void setStudent(Student student){
         this.student=student;
-        if(student!=null){
+        /*if(student!=null){
             if(this.id==null){
                 this.id=new AttemptId();
             }
             this.id.setStudentId(student.getId());
-        }
+        }*/
     }
 
 

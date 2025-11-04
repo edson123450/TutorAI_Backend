@@ -138,6 +138,8 @@ public class MessageService {
         teacherMsg.setRole(MessageRole.TEACHER);
         teacherMsg.setContent(teacherText);
         teacherMsg.setTopic(topic);
+        topic.addMessage(teacherMsg);
+        topicRepository.save(topic);
         messageRepository.save(teacherMsg);
 
         // 3) Construir transcripción completa (contexto + historial + último mensaje)
@@ -155,6 +157,8 @@ public class MessageService {
         assistantMsg.setRole(MessageRole.ASSISTANT);
         assistantMsg.setContent(assistantReply);
         assistantMsg.setTopic(topic);
+        topic.addMessage(assistantMsg);
+        topicRepository.save(topic);
         messageRepository.save(assistantMsg);
 
         // 6) Responder al cliente con el mensaje de la IA

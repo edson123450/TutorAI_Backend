@@ -1,6 +1,6 @@
 package com.example.tutorai.Level.Domain;
 
-import com.example.tutorai.Excercise.Domain.Exercise;
+import com.example.tutorai.Exercise.Domain.Exercise;
 import com.example.tutorai.ProgressLevel.Domain.ProgressLevel;
 import com.example.tutorai.Topic.Domain.Topic;
 import jakarta.persistence.*;
@@ -32,7 +32,7 @@ public class Level {
     private Integer minCorrectFirstTry;
 
     @Column(name="label", length=30, nullable = false)
-    private String label;
+    private String name;
 
     @OneToMany(mappedBy = "level", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Exercise> exercises =new HashSet<>();
@@ -46,7 +46,7 @@ public class Level {
         this.id=id;
         this.topic=topic;
         this.minCorrectFirstTry=minCorrectFirstTry;
-        this.label=label;
+        //this.label=label;
     }
 
     @Transient

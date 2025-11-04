@@ -56,13 +56,13 @@ public class Topic {
     @JsonIgnore
     private Set<Message> messages=new HashSet<>();
 
-    public boolean addLevel(Level level){
+    /*public boolean addLevel(Level level){
         if(levels.add(level)){
             level.setTopic(this);
             return true;
         }
         return false;
-    }
+    }*/
     public boolean removeLevel(Level level){
         if(levels.remove(level)){
             level.setTopic(null);

@@ -4,6 +4,8 @@ import com.example.tutorai.Classroom.DTOs.ClassroomCreateRequest;
 import com.example.tutorai.Classroom.DTOs.ClassroomDTO;
 import com.example.tutorai.Course.DTOs.CourseCreateRequest;
 import com.example.tutorai.Course.DTOs.CourseDTO;
+import com.example.tutorai.Exercise.DTOs.ExerciseDTO;
+import com.example.tutorai.Exercise.Domain.ExerciseService;
 import com.example.tutorai.Teacher.Domain.TeacherService;
 import com.example.tutorai.Topic.DTOs.TopicCreateRequest;
 import com.example.tutorai.Topic.DTOs.TopicDTO;
@@ -26,6 +28,7 @@ import java.util.List;
 public class TeacherController {
 
     private final TeacherService teacherService;
+    private final ExerciseService exerciseService;
 
     @PostMapping("/create/classroom")
     @ResponseStatus(HttpStatus.CREATED)
@@ -69,5 +72,21 @@ public class TeacherController {
         List<ClassroomDTO> classrooms=teacherService.getTeacherClassrooms(me.getId());
         return ResponseEntity.ok(classrooms);
     }*/
+
+    @GetMapping("/classroom/{classroomId}/course/{courseId}/topic/{topicNumber}/level/{levelNumber}/exercise/{exerciseNumber}")
+    @PreAuthorize("hasRole('TEACHER')")
+    public ResponseEntity<ExerciseDTO> getExercise(
+            @PathVariable Long classroomId,
+            @PathVariable Long courseId,
+            @PathVariable Integer topicNumber,
+            @PathVariable Integer levelNumber,
+            @PathVariable Integer exerciseNumber
+    ){
+        var dto= exerciseService.getOneForTeacher(classroomId,courseId,topicNumber,levelNumber,exerciseNumber);
+        return ResponseEntity.ok(dto);
+    }
+
+
+
 
 }
